@@ -1,0 +1,72 @@
+set_crc16_parameters calc 0x002b 0x0 0x0 false false
+set_crc16_parameters calc_0 0x002b 0x0 0x0 false false
+table_set_default exact_match tdrop
+table_set_default multipath tdrop
+
+table_add exact_match get_entries 0 => 0 1
+table_add exact_match get_entries 1 => 1 2
+table_add exact_match get_entries 2 => 3 3
+table_add exact_match get_entries 3 => 6 3
+table_add exact_match get_entries 4 => 9 3
+table_add exact_match get_entries 5 => 12 4
+table_add exact_match get_entries 6 => 16 4
+table_add exact_match get_entries 7 => 20 4
+table_add exact_match get_entries 8 => 24 5
+table_add exact_match get_entries 9 => 29 5
+table_add exact_match get_entries 10 => 34 5
+table_add exact_match get_entries 11 => 39 6
+table_add exact_match get_entries 12 => 45 6
+
+table_add  multipath get_port_position 0 => 1
+table_add  multipath get_port_position 1 => 1
+table_add  multipath get_port_position 2 => 2
+table_add  multipath get_port_position 3 => 1
+table_add  multipath get_port_position 4 => 1
+table_add  multipath get_port_position 5 => 2
+table_add  multipath get_port_position 6 => 1
+table_add  multipath get_port_position 7 => 2
+table_add  multipath get_port_position 8 => 2
+table_add  multipath get_port_position 9 => 1
+table_add  multipath get_port_position 10 => 2
+table_add  multipath get_port_position 11 => 3
+table_add  multipath get_port_position 12 => 1
+table_add  multipath get_port_position 13 => 1
+table_add  multipath get_port_position 14 => 2
+table_add  multipath get_port_position 15 => 3
+table_add  multipath get_port_position 16 => 1
+table_add  multipath get_port_position 17 => 2
+table_add  multipath get_port_position 18 => 2
+table_add  multipath get_port_position 19 => 3
+table_add  multipath get_port_position 20 => 1
+table_add  multipath get_port_position 21 => 2
+table_add  multipath get_port_position 22 => 3
+table_add  multipath get_port_position 23 => 3
+table_add  multipath get_port_position 24 => 1
+table_add  multipath get_port_position 25 => 2
+table_add  multipath get_port_position 26 => 2
+table_add  multipath get_port_position 27 => 3
+table_add  multipath get_port_position 28 => 3
+table_add  multipath get_port_position 29 => 1
+table_add  multipath get_port_position 30 => 1
+table_add  multipath get_port_position 31 => 2
+table_add  multipath get_port_position 32 => 3
+table_add  multipath get_port_position 33 => 3
+table_add  multipath get_port_position 34 => 1
+table_add  multipath get_port_position 35 => 1
+table_add  multipath get_port_position 36 => 2
+table_add  multipath get_port_position 37 => 2
+table_add  multipath get_port_position 38 => 3
+table_add  multipath get_port_position 39 => 1
+table_add  multipath get_port_position 40 => 1
+table_add  multipath get_port_position 41 => 2
+table_add  multipath get_port_position 42 => 3
+table_add  multipath get_port_position 43 => 3
+table_add  multipath get_port_position 44 => 4
+table_add  multipath get_port_position 45 => 1
+table_add  multipath get_port_position 46 => 1
+table_add  multipath get_port_position 47 => 2
+table_add  multipath get_port_position 48 => 3
+table_add  multipath get_port_position 49 => 4
+table_add  multipath get_port_position 50 => 4
+
+

@@ -1,0 +1,2 @@
+WARNING: attempt to set TCP maximum segment size to 1200, but got 536
+connect failed: No route to host
