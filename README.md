@@ -91,17 +91,17 @@ def _main():
         s[1],
         s[2]
         s[4],
-	      s[5],
-	      s[6],
+	s[5],
+	s[6],
     ]
     # defining the transmission state for each node from h1 to h2
     o = [
         [1, 1, 0, 1, 1, 0],     # s1   
-	      [1, 0],  # s2
+	[1, 0],  # s2
         [1, 0],  # s3
-	      [1, 0],	# s5	
-	      [1, 0],	#s6
-	      [0, 0, 0, 0, 0, 1], # s7
+	[1, 0],	# s5	
+	[1, 0],	#s6
+	[0, 0, 0, 0, 0, 1], # s7
     ]
 	print_poly(calculate_routeid(nodes, o, debug=DEBUG))
     
@@ -112,15 +112,16 @@ def _main():
         s[1],
         s[2]
         s[4],
-	      s[5],
-	      s[6],
+	s[5],
+	s[6],
+	]
     # defining the transmission weight for each node from h1 to h2
     w = [
         [0, 0, 1, 0, 1, 1],     # s1
         [0, 0],  # s2
         [0, 0],  # s3
-	      [0, 0],	# s5	
-	      [0, 0], # s6
+	[0, 0],	# s5	
+	[0, 0], # s6
         [0, 0, 0, 0, 0, 0, 0, 0],  # s7
     ]
     print("wid h1 to h2 ====")
@@ -132,21 +133,21 @@ def _main():
         s[6],
         s[5],
         s[4],
-	      s[2],
-	      s[1],
-	      s[0],
+	s[2],
+	s[1],
+	s[0],
     ]
 
 
   # defining the transmission state for each node from h2 to h1
     o = [
         [1, 1, 0, 1, 1, 0],     # s7
-	      [0, 1],  # s6
+	[0, 1],  # s6
         [0, 1],  # s5
-	      [0, 1],	# s4	
-	      [0, 1], # s3
-	      [0, 1], # s2        
-	      [0, 0, 0, 0, 0, 1], # s1
+	[0, 1],	# s4	
+	[0, 1], # s3
+	[0, 1], # s2        
+	[0, 0, 0, 0, 0, 1], # s1
     ]
     print("routeid h2 to h1 ====")
     print_poly(calculate_routeid(nodes, o, debug=DEBUG))
@@ -157,20 +158,20 @@ def _main():
         s[6],
         s[5],
         s[4],
-	      s[2],
-	      s[1],
-	      s[0],
+	s[2],
+	s[1],
+	s[0],
     ]
 
    # defining the transmission weight for each node from h2 to h1
     w = [
         [0, 0, 1, 0, 1, 1],     # s7
-	      [0, 0],  # s6
+	[0, 0],  # s6
         [0, 0],  # s5
-	      [0, 0],	# s4	
-	      [0, 0], # s3
-	      [0, 0], # s2        
-	      [0, 0, 0, 0, 0, 0], # s1
+	[0, 0],	# s4	
+	[0, 0], # s3
+	[0, 0], # s2        
+	[0, 0, 0, 0, 0, 0], # s1
     ]    
     print("wid h2 to h1 ====")
     print_poly(calculate_routeid(nodes, w, debug=DEBUG)) 
@@ -252,9 +253,11 @@ table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.1.1/32 => 2 1 00
 No terminal que estiver executando a topologia no Mininet, execute 1 ping de um host para outro, exemplo: h1 ping h2 -c 1 e analisar log para entender a execução.
 Abra novo terminal para acompanhar os logs de execução:
 Para verificar o nome do arquivo: 
+```sh
 $ cd ~
 $ ls /tmp
 $ tail -f /tmp/bmv2-<nome_switch>-log
+```
 
 
 
