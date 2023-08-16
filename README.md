@@ -4,7 +4,7 @@ O artigo apresenta a abordagem MTSPolKA para otimizar o tráfego em redes de dat
 
 ## Cenário da nossa proposta
 
-![](topologia/topologia/MTS-PolKA.png)
+![](topologia/MTS-PolKA.png)
 
 ## Organização dos arquvivos
 
@@ -65,7 +65,7 @@ $ sudo python3 run_linear_topology.py
 
 ## Cenário da profile 11
 
-![](topologia/topologia/topologia/Cenario_MTS-PolKA-Profile-11.png)
+![](topologia/Cenario_MTS-PolKA-Profile-11.png)
 
 Definição dos rótulos que serão usados por cada nó de núcleo para determinar o estado das portas de saída e perfis de divisão de tráfego correspondentes. Cada nó de núcleo possui duas tabelas estáticas com perfis de tráfego pré-definidos, que são selecionados a partir de operações com os rótulos routeID e wID de cada pacote.
 
