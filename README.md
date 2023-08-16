@@ -1,26 +1,22 @@
 <<<<<<< HEAD
-# Traffic Splitting M-PolKA
+# MTS-PolKA: Divisão de tráfego multicaminho em proporção de peso com roteamento na fonte
 
-Neste artigo, será implementado uma forma de divisão de tráfego. O conceito da nossa proposta é colocar o conceito nas entradas de correspondência/ação.  Um algoritmo de balanceamento de carga que distribui o tráfego em vários caminhos para otimizar a utilização de múltiplos links. O objetivo é distribuir a carga de forma proporcional ao custo de cada link, a fim de maximizar o uso de cada um deles. Cada grupo de peso (IdPerfil) está associado a um conjunto de portas de saída e seus pesos. A tabela de multipath descreve as portas de saída para cada grupo de peso (IdPerfil) e replica uma entrada de porta proporcionalmente ao seu peso. Suponha que haja totalmente 5 portas de saída no switch. Conforme a tabela Exact Match, o grupo de peso (IdPerfil 11) tem 5 entradas a partir da 39ª entrada até a 44ª entrada. Entre as 5 entradas, o número de entradas alocadas para as 4 portas é 1, 1, 2, 3, 3, e 4 respectivamente. Assim, a porta de saída 1, 2, 3  tem a seguinte proporção de divisão de tráfego 1:1:2 respectivamente. O tráfego do grupo de peso (IdPerfil 11)  será distribuído para as 5 portas proporcionalmente aos seus pesos. Em seguida, o switch executa o hash usando o times stamp sobre o cabeçalho do pacote e gera um resultado de 6. O resultado do hashing é o número de entradas para o grupo de peso, ou seja, 6 mod 5, e obtém um resultado de 1. Em seguida, o switch adiciona o resultado do mod para o índice base 39 do grupo e obtém 40, que é o índice da entrada da tabela para cuja porta de saída o pacote de entrada será encaminhado. Quanto maior o peso da porta de saída, mais entradas ela ocupa e maior a probabilidade de ser hash.
+O artigo apresenta a abordagem MTSPolKA para otimizar o tráfego em redes de data centers com múltiplos caminhos redundantes, visando equilibrar a carga de forma dinâmica e eficiente entre os caminhos para maximizar a largura de banda. A abordagem é baseada em roteamento de fonte multicaminho, permitindo que a fonte faça escolhas de distribuição usando rótulos nos pacotes. Isso possibilita a divisão dinâmica do tráfego sem reconfigurações complexas nas tabelas de comutação. Ao contrário de abordagens anteriores, a MTS-PolKA utiliza sistema numérico de resíduos para roteamento de fonte sem armazenamento de estado. Testes demonstram eficácia na distribuição de tráfego
+e melhorias em relação a abordagens convencionais. MTS-PolKA é uma solução inovadora para otimização do tráfego em redes de data centers, pois permite alterar a distribuição de tráfego de forma simultânea em todos os switches do caminho.
 
-![](figures/Tables_Traffic-Splitting_M-Polka.png)
 
 # Cenário
 
-![](figures/cenario_traffic-spliting_m-polka.png)
+![](topologia/Cenario_MTS-PolKA-Cenario_WM-Polka-01.drawio.png)
 
+# Organização dos arquvivos
 
-<data> - diretório onde são armazenados os dados adquiridos no experimento
-<result> - diretório onde são gerados os gráficos
-grafico.py - gera gráfico a partir dos dados coletados
-interface_map.txt - mapa das interfaces de rede das máquinas virtuais com as interfaces do freeRtr
-networks.txt - tabela contendo nome da VM, Interface, MAC Address e Nome da rede interna
-template-XXXX-hw.txt - Configuração de software do roteador XXXX
-template-XXXX-sw.txt - Configuração de hardware do roteador XXXX
-test2.png - gráfico com o resultado do experimento
-test2.sh - script que executa o experimento, no host2 './test2.sh rx' e no host1 './test2.sh tx'
-topologia2.png - topologia usada neste experimento
-
+- <data> - diretório onde são armazenados os dados adquiridos no experimento
+- <envio> - diretório onde os scripts de envio de mensagens.
+- <m-polka> - diretório onde estão os aruivos em p4 de configuração dos switches edges e core.
+- <topologia> - diretório onde estão os arquivos da topogia.
+- calc_routeid-wid.py- calcula do routeid e wid das portas de transmissão.
+- run_cenario_topology.py - executa o mininet com a topologia MTS-PolKA.
 
 =======
 # MTS-PolKA
