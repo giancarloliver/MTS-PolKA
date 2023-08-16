@@ -2,6 +2,9 @@
 
 O artigo apresenta a abordagem MTSPolKA para otimizar o tráfego em redes de data centers com múltiplos caminhos redundantes, visando equilibrar a carga de forma dinâmica e eficiente entre os caminhos para maximizar a largura de banda. A abordagem é baseada em roteamento de fonte multicaminho, permitindo que a fonte faça escolhas de distribuição usando rótulos nos pacotes. Isso possibilita a divisão dinâmica do tráfego sem reconfigurações complexas nas tabelas de comutação. Ao contrário de abordagens anteriores, a MTS-PolKA utiliza sistema numérico de resíduos para roteamento de fonte sem armazenamento de estado. Testes demonstram eficácia na distribuição de tráfego e melhorias em relação a abordagens convencionais. MTS-PolKA é uma solução inovadora para otimização do tráfego em redes de data centers, pois permite alterar a distribuição de tráfego de forma simultânea em todos os switches do caminho.
 
+## Cenário da nossa proposta
+
+![](topologia/MTS-PolKA.png)
 
 ## Organização dos arquvivos
 
@@ -9,12 +12,9 @@ O artigo apresenta a abordagem MTSPolKA para otimizar o tráfego em redes de dat
 - \<envio> - diretório onde os scripts de envio de mensagens.
 - \<m-polka> - diretório onde estão os aruivos em p4 de configuração dos switches edges e core.
 - \<topologia> - diretório onde estão os arquivos da topogia.
+- MTS-PolKA.pdf - Artigo em pdf.
 - calc_routeid-wid.py- calcula do routeid e wid das portas de transmissão.
 - run_cenario_topology.py - executa o mininet com a topologia MTS-PolKA.
-
-## Cenário
-
-![](topologia/Cenario_MTS-PolKA-Cenario_WM-Polka-01.drawio.png)
 
 ## Execução iniciais
 1. Download e instalação da VM:
@@ -22,7 +22,7 @@ O artigo apresenta a abordagem MTSPolKA para otimizar o tráfego em redes de dat
    - Após o download, acesse a VM com as seguintes credenciais: user: wifi, pass: wifi
 3. Clone do GitHub:
 ```sh
-$ git clone https://github.com/rafaelsilvag/m-polka.git
+$ git clone https://github.com/giancarloliver/MTS-PolKA.git
 ```
 ```sh
 $ make
@@ -62,6 +62,10 @@ Para criar a topologia usando o Mininet, devemos executar o seguinte comando:
 ```sh
 $ sudo python3 run_linear_topology.py
 ```
+
+## Cenário da profile 11
+
+![](topologia/Cenario_MTS-PolKA-Profile-11.png)
 
 Definição dos rótulos que serão usados por cada nó de núcleo para determinar o estado das portas de saída e perfis de divisão de tráfego correspondentes. Cada nó de núcleo possui duas tabelas estáticas com perfis de tráfego pré-definidos, que são selecionados a partir de operações com os rótulos routeID e wID de cada pacote.
 
