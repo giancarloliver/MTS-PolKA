@@ -8,30 +8,52 @@ from mn_wifi.net import Mininet_wifi
 from mn_wifi.bmv2 import P4Switch
 from mininet.term import makeTerm
 from mininet.node import RemoteController
+from mininet.term import makeTerm
+from mininet.node import RemoteController
 from mininet.net import Mininet
 from mininet.node import CPULimitedHost
 from mininet.link import TCLink
+from mininet.util import irange,dumpNodeConnections
 
 from multiprocessing import Process
-import os
 from subprocess import Popen
 from time import sleep
-from scapy.all import sendp, get_if_list, get_if_hwaddr
-from scapy.all import Ether, IP, UDP
+
+import os
+import sys
+import pdb
+import subprocess
+import time
+
+
+
 
 n_switches_E = 2
 n_switches_C = 7
-# BW = 10
+BW = 10
+
+def monitor_bwm_ng(fname, interval_sec): 
+    cmd = ("sleep 1; bwm-ng -t %s -o csv -u packtes -T rate -C ',' > %s" % 
+            (interval_sec * 1000, fname)) 
+    Popen(cmd, shell=True).wait()
 
 
-def topology(remote_controller,net, hosts):
+
+def topology(remote_controller):
+
+    os.system("sudo mn -c")
+
+
     # "Create a network."
-    # net = Mininet_wifi()
+    net = Mininet_wifi()
+
+    
 
     # linkopts = dict()
     switches = []
     edges = []
-    #hosts = []
+    hosts = []
+    
 
     info("*** Adding hosts\n")
     for i in range(1, n_switches_E + 1):
@@ -53,7 +75,7 @@ def topology(remote_controller,net, hosts):
             json=json_file,
             thriftport=50000 + int(i),
             switch_config=config,
-            loglevel='debug',
+            loglevel='error',
             cls=P4Switch,
         )
         switches.append(switch)
@@ -71,7 +93,7 @@ def topology(remote_controller,net, hosts):
             json=json_file,
             thriftport=50100 + int(i),
             switch_config=config,
-            loglevel='debug',
+            loglevel='error',
             cls=P4Switch,
         )
         edges.append(edge)
@@ -79,27 +101,33 @@ def topology(remote_controller,net, hosts):
     info("*** Creating links\n")
 
     for i in range(0, n_switches_E):
-        net.addLink(hosts[i], edges[i])
-    net.addLink(switches[0], edges[0])
-    net.addLink(switches[6], edges[1])
+        net.addLink(hosts[i], edges[i], bw=BW)
+    net.addLink(switches[0], edges[0], bw=BW)
+    net.addLink(switches[6], edges[1], bw=BW)
     
     for i in range(1, n_switches_C -1):
-        net.addLink(switches[0], switches[i])
+        net.addLink(switches[0], switches[i], bw=BW)
 
     for i in range(1, n_switches_C -1):
-        net.addLink(switches[6], switches[i])
+        net.addLink(switches[6], switches[i], bw=BW)
       
    
     
         
-    
+    info("*** Starting network\n")
+    net.start()
+    net.staticArp()
+
     
 
     # disabling offload for rx and tx on each host interface
+    mtu_value = 1400
     for host in hosts:
         host.cmd("ethtool --offload {}-eth0 rx off tx off".format(host.name))   
+        host.cmd(f'ifconfig {host.defaultIntf()} mtu {mtu_value}')
         host.cmd("sysctl -w net.ipv6.conf.all.disable_ipv6=1")
         host.cmd("sysctl -w net.ipv6.conf.default.disable_ipv6=1")
+        host.cmd("sysctl -w net.ipv6.conf.lo.disable_ipv6=1")
         host.cmd("sysctl -w net.ipv6.conf.lo.disable_ipv6=1")
     for sw in net.switches:
         sw.cmd("sysctl -w net.ipv6.conf.all.disable_ipv6=1")
@@ -107,60 +135,34 @@ def topology(remote_controller,net, hosts):
         sw.cmd("sysctl -w net.ipv6.conf.lo.disable_ipv6=1")
 
 
-   
+     # # Definicao nome arquivo bwm-ng
+    arq_bwm = f"data/run/w0-tmp.bwm"
+        
+    # # Definicao do monitor de vazao
+    monitor_cpu = Process(target=monitor_bwm_ng, args=(arq_bwm, 1.0))        
+        
+    # Chamada da funcao de monitoramento de pacotes de rede    
+    print("Start bwm-ng...")
+    # Start the bwm-ng    
+    monitor_cpu.start()
+    time.sleep(1)    
 
-    
+
+    info("*** Running CLI\n")
+    CLI(net)
+
+    os.system("pkill -9 -f 'xterm'")
+    os.system("killall bwm-ng")
+    info("*** Stopping network\n")
+    net.stop()
+
+ 
 
 
 if __name__ == "__main__":
     setLogLevel("info")
     remote_controller = False
-    hosts = []
-    net = Mininet_wifi()
-    topology(remote_controller,net, hosts)
-
-    #Definicao nome arquivo bwm-ng
-    arq_bwm = "teste.bwm"
-
-    #Definicao da funcao de monitoramento de pacotes de rede 
-    def monitor_bwm_ng(fname, interval_sec): 
-        cmd = ("sleep 1; bwm-ng -t %s -o csv -u bits -T rate -C ',' > %s" % 
-                (interval_sec * 1000, fname)) 
-        Popen(cmd, shell=True).wait()
-        
-    info("*** Starting network\n")
-    net.start()
-    net.staticArp()
-    net.waitConnected()
-
-
-    #definicao do monitor de vao
-    monitor_cpu = Process(target=monitor_bwm_ng, args=(arq_bwm, 1.0))
-
-    #Chamada da funcao de monitoramento de pacotes de rede
-    monitor_cpu.start()
-
-    #Inicia o teste de comunicacao de todos para todos 
-   
-       
-    hosts[2].cmd('iperf3 -s -u -p 5001 > /dev/null &') 
-    hosts[1].cmd('iperf3 -c 10.0.2.2 -u -k 10000  -p 5001  -i 1 -yc > /dev/null')          
-
-    #Pausar o codigo para aguardar a finalização dos flux
-    print('Aguarde ate que a experiencia seja concluida ...') 
-    sleep(300)
-
-    #Finalizar os processos de Iperf, bwm-ng
-    os.system("killall -9 iperf") 
-    os.system("killall -9 bwm-ng")
-
-    #Finalizar o monitor de banda e a rede do Mininet
-    monitor_cpu.terminate()
-    print('Finalizado.')
-    print('Arquivo BWM-NG gerado em: ',arq_bwm)
+    topology(remote_controller)
     
 
-    os.system("pkill -9 -f 'xterm'")
-
-    info("*** Stopping network\n")
-    net.stop()
+    
