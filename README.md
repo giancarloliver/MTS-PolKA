@@ -12,9 +12,24 @@ O artigo apresenta a abordagem MTSPolKA para otimizar o tráfego em redes de dat
 - calc_routeid-wid.py- calcula do routeid e wid das portas de transmissão.
 - run_cenario_topology.py - executa o mininet com a topologia MTS-PolKA.
 
-  # Cenário
+# Cenário
 
 ![](topologia/Cenario_MTS-PolKA-Cenario_WM-Polka-01.drawio.png)
+
+# Execução iniciais
+1. Download e instalação da VM
+2. Clone do GitHub: $ git clone https://github.com/giancarloliver/MTS-PolKA.git   
+3. make
+4. Executar topologia: $ sudo python3 run_linear_topology.py
+Não pingou de h1 para h2
+5. Instalação da lib polka-routing: $ python3 -m pip install polka-routing --user
+  Ao instalar a lib, apareceu os alertas:
+  Installing collected packages:  
+  WARNING: The script isympy is installed in '/home/wifi/.local/bin' which is not on PATH. Consider adding this directory to PATH or, if you prefer to suppress this warning,   use --no-warn-script-location.                  
+  Successfully installed mpmath-1.2.1 networkx-2.6.3 pandas-1.3.4 polka-routing-0.2.2 pytz-2021.3 sympy-1.9
+  WARNING: You are using pip version 20.2.3; however, version 21.3 is available. You should consider upgrading via the '/usr/bin/python3 -m pip install --upgrade pip'         command.
+
+
 
 =======
 # MTS-PolKA
