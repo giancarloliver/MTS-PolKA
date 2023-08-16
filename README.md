@@ -9,6 +9,7 @@ O artigo apresenta a abordagem MTSPolKA para otimizar o tráfego em redes de dat
 - \<envio> - diretório onde os scripts de envio de mensagens.
 - \<m-polka> - diretório onde estão os aruivos em p4 de configuração dos switches edges e core.
 - \<topologia> - diretório onde estão os arquivos da topogia.
+- MTS-PolKA.pdf - Artigo em pdf.
 - calc_routeid-wid.py- calcula do routeid e wid das portas de transmissão.
 - run_cenario_topology.py - executa o mininet com a topologia MTS-PolKA.
 
