@@ -6,10 +6,10 @@
 ## Cenários utilizados nos testes de divisão de tráfego:
 
 ### Cenário profile 0
-![](artigo/cenarios/Cenario_MTS-PolKA-Profiles-profile-0.png)
+![](/artigo/cenarios/Cenario_MTS-PolKA-Profiles-profile-0.png)
 
 ### Cenário profile 4
-![](artigo/cenarios/Cenario_MTS-PolKA-Profiles-profile-4.png)
+![](/artigo/cenarios/Cenario_MTS-PolKA-Profiles-profile-4.png)
 
 ### Cenário profile 11
-![](artigo/cenarios/Cenario_MTS-PolKA-Profiles-profile-11.png)
+![](/artigo/cenarios/Cenario_MTS-PolKA-Profiles-profile-11.png)
