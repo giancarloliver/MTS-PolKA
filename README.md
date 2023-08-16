@@ -20,11 +20,18 @@ O artigo apresenta a abordagem MTSPolKA para otimizar o tráfego em redes de dat
 1. Download e instalação da VM:
    [[6.7GB Size] - Lubuntu 20.04 x64](https://drive.google.com/file/d/1oozRqFO2KjjxW0Ob47d6Re4i6ay1wdwg/view?usp=sharing) - Mininet-WiFi com P4 (_pass: wifi_).
    - Após o download, acesse a VM com as seguintes credenciais: user: wifi, pass: wifi
-3. Clone do GitHub: $ git clone https://github.com/giancarloliver/MTS-PolKA.git   
-4. make
-5. Executar topologia: $ sudo python3 run_linear_topology.py
-Não pingou de h1 para h2
-6. Instalação da lib polka-routing: $ python3 -m pip install polka-routing --user
+3. Clone do GitHub:
+```sh
+$ git clone https://github.com/rafaelsilvag/m-polka.git
+```
+```sh
+$ make
+```  
+4. Executar topologia:
+```sh
+$ sudo python3 run_linear_topology.py
+``` 
+5. Instalação da lib polka-routing: $ python3 -m pip install polka-routing --user
   Ao instalar a lib, apareceu os alertas:
   Installing collected packages:  
   WARNING: The script isympy is installed in '/home/wifi/.local/bin' which is not on PATH. Consider adding this directory to PATH or, if you prefer to suppress this warning,   use --no-warn-script-location.                  
@@ -39,17 +46,22 @@ Não pingou de h1 para h2
 ## 1) Passo a passo da execução básica 
 
 Para compilar os códigos P4 MTS-PolKA, você deve executar o seguinte comando:
+```sh
 $ cd m-polka/m-polka
 $ make
 $ cd ..
-
+``` 
 É importante notar que para cada modificação, temos que recompilar usando o comando anterior.
 
 Gerar o routeid e o wid:
+```sh
 $ python3 calc_routeid.py
+```
 
 Para criar a topologia usando o Mininet, devemos executar o seguinte comando:
+```sh
 $ sudo python3 run_linear_topology.py
+```
 
 Definição dos rótulos que serão usados por cada nó de núcleo para determinar o estado das portas de saída e perfis de divisão de tráfego correspondentes. Cada nó de núcleo possui duas tabelas estáticas com perfis de tráfego pré-definidos, que são selecionados a partir de operações com os rótulos routeID e wID de cada pacote.
 
