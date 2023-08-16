@@ -23,7 +23,7 @@ O artigo apresenta a abordagem MTSPolKA para otimizar o tráfego em redes de dat
    - Após o download, acesse a VM com as seguintes credenciais: user: wifi, pass: wifi
 3. Clone do GitHub:
 ```sh
-$ git clone https://github.com/rafaelsilvag/m-polka.git
+$ git clone https://github.com/giancarloliver/MTS-PolKA.git
 ```
 ```sh
 $ make
