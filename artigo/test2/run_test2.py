@@ -33,7 +33,7 @@ os.system("sudo mn -c")
 
 n_switches_E = 2
 n_switches_C = 7
-BW = 10
+BW = 100
 
 
 def monitor_bwm_ng(fname, interval_sec): 
@@ -61,8 +61,8 @@ def topology(remote_controller):
     for i in range(1, n_switches_C + 1):
         # read the network configuration
         path = os.path.dirname(os.path.abspath(__file__))
-        json_file = path + "/m-polka/m-polka-core.json"
-        config = path + "/m-polka/config/s{}-commands.txt".format(i)
+        json_file = path + "/../../m-polka/m-polka-core.json" 
+        config = path + "/../../m-polka/config/s{}-commands.txt".format(i)
         # Add P4 switches (core)
         switch = net.addSwitch(
             "s{}".format(i),
@@ -79,8 +79,8 @@ def topology(remote_controller):
     for i in range(1, n_switches_E + 1):
         # read the network configuration
         path = os.path.dirname(os.path.abspath(__file__))
-        json_file = path + "/m-polka/m-polka-edge.json"
-        config = path + "/m-polka/config/e{}-commands.txt".format(i)
+        json_file = path + "/../../m-polka/m-polka-edge.json"
+        config = path + "/../../m-polka/config/e{}-commands.txt".format(i)
         # add P4 switches (core)
         edge = net.addSwitch(
             "e{}".format(i),
@@ -131,7 +131,8 @@ if __name__ == "__main__":
 
     "Create a network."
     net = Mininet_wifi()
-
+    print('******************************************************')
+    os.system("pwd")
     topology(remote_controller) 
 
     h1, h2 = net.get('h1', 'h2')
@@ -140,7 +141,7 @@ if __name__ == "__main__":
     h2.cmd('ifconfig h2-eth0 mtu 1400')   
 
 
-    samples = 3
+    samples = 30
     test = 1
 
     for j in range(samples):
@@ -150,7 +151,7 @@ if __name__ == "__main__":
         print(f"Starting Time: {start_time:.2f} seconds")          
 
         # # Definicao nome arquivo bwm-ng
-        arq_bwm = f"run/data/{test}-tmp.bwm"
+        arq_bwm = f"data/run/{test}-tmp.bwm"
         
 
         # # Definicao do monitor de vazao
@@ -164,12 +165,14 @@ if __name__ == "__main__":
         time.sleep(1) 
         monitor_cpu.start()
         time.sleep(1)
-           
+                   
 
         # Start the iperf client on h1
         iperf_cmd = f'iperf3 -u -c {h2.IP()} -t 35 -b 100M'
         h1.cmd(iperf_cmd + ' &')
         time.sleep(1)
+
+       
 
         # Profiles loop
         profiles = [
@@ -191,7 +194,12 @@ if __name__ == "__main__":
         os.system("killall iperf")
         h1.cmd("killall bwm-ng")
         os.system("killall bwm-ng")
-        os.system(f"grep 's7-eth1' run/data/{test}-tmp.bwm > run/data/a{test}.csv")
+        os.system(f"grep 's7-eth1' data/run/{test}-tmp.bwm > data/run/s7-a{test}.csv")
+        os.system(f"grep 's2-eth2' data/run/{test}-tmp.bwm > data/run/s2-a{test}.csv")
+        os.system(f"grep 's3-eth2' data/run/{test}-tmp.bwm > data/run/s3-a{test}.csv")
+        os.system(f"grep 's4-eth2' data/run/{test}-tmp.bwm > data/run/s4-a{test}.csv")
+        os.system(f"grep 's5-eth2' data/run/{test}-tmp.bwm > data/run/s5-a{test}.csv")
+        os.system(f"grep 's6-eth2' data/run/{test}-tmp.bwm > data/run/s6-a{test}.csv")
         test=test+1
         time.sleep(1)  
 
