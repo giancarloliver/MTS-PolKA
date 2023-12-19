@@ -31,10 +31,13 @@ $ make
 ```sh
 $ sudo python3 run_linear_topology.py
 ``` 
-5. Instalação da lib polka-routing: $ python3 -m pip install polka-routing --user
+5. Instalação da lib polka-routing:
+```sh
+$ python3 -m pip install polka-routing --user
+``` 
   Ao instalar a lib, apareceu os alertas:
-  Installing collected packages:  
-  WARNING: The script isympy is installed in '/home/wifi/.local/bin' which is not on PATH. Consider adding this directory to PATH or, if you prefer to suppress this warning,   use --no-warn-script-location.                  
+  Installing collected packages: WARNING: The script isympy is installed in '/home/wifi/.local/bin' which is not on PATH. Consider adding this directory to PATH or, if you 
+  prefer to suppress this warning,   use --no-warn-script-location.                  
   Successfully installed mpmath-1.2.1 networkx-2.6.3 pandas-1.3.4 polka-routing-0.2.2 pytz-2021.3 sympy-1.9
   WARNING: You are using pip version 20.2.3; however, version 21.3 is available. You should consider upgrading via the '/usr/bin/python3 -m pip install --upgrade pip'         command.
 
@@ -65,7 +68,7 @@ $ sudo python3 run_linear_topology.py
 
 ## Cenário da profile 11
 
-![](topologia/Cenario_MTS-PolKA-Profile-11.png)
+![](artigo/cenarios/Cenario_MTS-PolKA-Profiles-profile-11.png)
 
 Definição dos rótulos que serão usados por cada nó de núcleo para determinar o estado das portas de saída e perfis de divisão de tráfego correspondentes. Cada nó de núcleo possui duas tabelas estáticas com perfis de tráfego pré-definidos, que são selecionados a partir de operações com os rótulos routeID e wID de cada pacote.
 
