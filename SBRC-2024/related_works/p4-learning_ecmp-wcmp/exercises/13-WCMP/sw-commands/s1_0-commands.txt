@@ -1,0 +1,18 @@
+table_set_default ipv4_lpm drop
+table_set_default wcmp_group_to_nhop drop
+
+table_add ipv4_lpm set_nhop 10.0.1.1/32 =>  00:00:0a:00:01:01 1
+table_add ipv4_lpm set_nhop 10.0.3.3/32 =>  00:00:0a:00:03:03 2
+table_add ipv4_lpm wcmp_group 10.0.2.2/32 => 1 4
+table_add ipv4_lpm wcmp_group 10.0.4.4/32 => 2 1
+table_add ipv4_lpm wcmp_group 10.0.5.5/32 => 3 1
+
+//wcmp id:1 port 0,1,2,3
+table_add wcmp_group_to_nhop set_nhop 1 0 =>  00:00:00:03:01:00 3
+table_add wcmp_group_to_nhop set_nhop 1 1 =>  00:00:00:04:01:00 4
+table_add wcmp_group_to_nhop set_nhop 1 2 =>  00:00:00:05:01:00 5
+table_add wcmp_group_to_nhop set_nhop 1 3 =>  00:00:00:06:01:00 6
+table_add wcmp_group_to_nhop set_nhop 2 0 =>  00:00:00:03:01:00 3
+table_add wcmp_group_to_nhop set_nhop 3 0 =>  00:00:00:07:01:00 7
+
+

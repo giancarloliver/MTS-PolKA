@@ -1,0 +1,5 @@
+table_set_default tunnel_encap_process_sr tdrop
+table_set_default ipv4_lpm drop
+table_add ipv4_lpm ipv4_forward 10.0.3.3/32 => 1
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.5.5/32 => 2 1 00:00:00:00:05:05 13891518735303344008 7494471750674993136
+table_add tunnel_encap_process_sr add_sourcerouting_header 10.0.15.15/32 => 2 1 00:00:00:00:0f:0f 13891518735303344008 7494471750674993136

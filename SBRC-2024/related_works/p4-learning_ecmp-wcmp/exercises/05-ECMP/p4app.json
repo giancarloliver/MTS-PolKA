@@ -1,0 +1,36 @@
+{
+  "p4_src": "p4src/ecmp.p4",
+  "cli": true,
+  "pcap_dump": true,
+  "enable_log": true,
+  "topology": {
+    "assignment_strategy": "mixed",
+    "links": [["h1", "s1"], ["h2", "s6"], ["s1", "s2"], ["s1", "s3"], ["s1", "s4"], ["s1", "s5"], ["s2", "s6"], ["s3", "s6"], ["s4", "s6"], ["s5", "s6"]],
+    "hosts": {
+      "h1": {
+      },
+      "h2": {
+      }
+    },
+    "switches": {
+      "s1": {
+        "cli_input": "sw-commands/s1-commands.txt"
+      },
+      "s2": {
+        "cli_input": "sw-commands/s2-commands.txt"
+      },
+      "s3": {
+        "cli_input": "sw-commands/s3-commands.txt"
+      },
+      "s4": {
+        "cli_input": "sw-commands/s4-commands.txt"
+      },
+      "s5": {
+        "cli_input": "sw-commands/s5-commands.txt"
+      },
+      "s6": {
+        "cli_input": "sw-commands/s6-commands.txt"
+      }
+    }
+  }
+}
