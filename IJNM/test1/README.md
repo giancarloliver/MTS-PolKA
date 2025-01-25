@@ -1,5 +1,5 @@
 # File organization
-
+- \<conf> - directory where the configuration files of the experiment profiles are stored.
 - \<data> - directory where the data acquired in the experiment is stored and where the graph is generated from the collected data
 - \<result> - directory where the graphs are generated
 
