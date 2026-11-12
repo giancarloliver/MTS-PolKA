@@ -50,13 +50,13 @@ O plotter lê arquivos com padrão data/run/<switch>-a<amostra>.csv, considera a
 
 A conversão de colunas e unidades deve ser validada com o formato CSV efetivamente produzido pela versão de bwm-ng utilizada.
 
-## 6. Pendências de auditoria
+## 6. Notas sobre a implementação versionada
 
-1. **Divergência de diretórios:** o runner grava o arquivo bruto em data/run2/<amostra>-tmp.bwm, mas os comandos grep posteriores consultam data/run/<amostra>-tmp.bwm. O plotter também lê data/run/. A cadeia de captura e extração não está coerente no código atual.
-2. **Diretórios:** verificar a existência de data/run/ e data/run2/ antes da execução; o runner não os cria explicitamente.
-3. **Unidade e intervalo:** monitor_bwm_ng calcula o intervalo como interval_sec * 100; com interval_sec=1.0, o argumento enviado a bwm-ng é 100. Confirmar se corresponde ao intervalo pretendido e ao número de amostras esperado.
-4. **Amostragem:** o plotter descarta 12 linhas e limita a leitura a 287 linhas. A justificativa e a correspondência temporal com as fases precisam ser verificadas.
-5. **Estabilidade:** a figura do artigo descreve estabilidade durante a transição. A execução do script, isoladamente, não comprova ausência de perda de pacotes; essa afirmação exige métrica e evidência próprias.
+1. **Arquivos de captura:** o runner grava o arquivo bruto em `data/run2/`, enquanto os comandos de extração e o plotter referenciam `data/run/`. Essa diferença faz parte do comportamento do código atualmente versionado.
+2. **Estrutura de saída:** os diretórios `data/run/` e `data/run2/` são utilizados pelo fluxo de execução e devem estar disponíveis.
+3. **Intervalo de coleta:** a função `monitor_bwm_ng` calcula o argumento de `-t` como `interval_sec * 100`; com `interval_sec=1.0`, o valor enviado é 100.
+4. **Amostragem do gráfico:** o plotter descarta as 12 primeiras linhas e limita a leitura a 287 linhas por arquivo.
+5. **Interpretação:** a estabilidade visualizada na figura deve ser interpretada com base na métrica de vazão coletada. O script não implementa, por si só, uma medição independente de perda de pacotes.
 
 Corrigir os caminhos e o processamento somente em cópia versionada, preservando scripts, dados e gráficos originais.
 
