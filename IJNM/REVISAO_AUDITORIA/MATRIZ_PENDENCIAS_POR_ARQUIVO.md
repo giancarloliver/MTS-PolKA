@@ -85,6 +85,25 @@ The article's public text establishes the following reference values and definit
 
 The Test 4 code audit found that `plotter_fct.py` plots interface throughput from `bwm-ng` CSVs, rather than deriving FCT from the iperf3 flow logs. Therefore, the article's FCT values cannot be considered reproduced by that plotter. The retransmission plotter expects method-named text files whose provenance still needs to be confirmed. The latency plotter's input path differs from the execution script's output path. These issues remain open until the source logs and their exact run provenance are available.
 
+## 4A. Non-destructive candidate scripts
+
+A separate branch was created so that candidate changes do not replace the originals:
+
+- Branch: [`audit/candidate-script-corrections-v1`](https://github.com/giancarloliver/MTS-PolKA/tree/audit/candidate-script-corrections-v1)
+- Candidate guide: [`IJNM/REVISAO_AUDITORIA/scripts-candidatos/README.md`](https://github.com/giancarloliver/MTS-PolKA/blob/audit/candidate-script-corrections-v1/IJNM/REVISAO_AUDITORIA/scripts-candidatos/README.md)
+
+| Candidate copy | Purpose of the candidate change | Validation status |
+|---|---|---|
+| `IJNM/test1/run_test1.audit-v1.py` | Corrects `packtes` to `packets` and creates the capture directory. | Not run; confirm `bwm-ng` option in target environment. |
+| `IJNM/test2/run_test-2.audit-v1.py` | Stores new raw captures and extracted CSVs under `data/audit-v1/`, avoiding historical paths. | Not run; verify with source data and Mininet/BMv2. |
+| `IJNM/test2/plotter_test-2.audit-v1.py` | Reads only the candidate CSV directory and writes a separate audit-v1 graph. | Not run; validate against real CSVs and timestamps. |
+| `IJNM/test3/run_test-3.audit-v1.py` | Removes the dangling `-b` token from TCP commands and isolates new captures/CSVs under `data/audit-v1/`. | Not run; confirm intended TCP parameters and test behavior. |
+| `IJNM/test3/grafico-test-3.audit-v1.py` | Reads candidate CSVs and writes a separate graph. | Not run; validate series, sampling and units. |
+| `IJNM/test4/mts-polka/plotter_latency.audit-v1.py` | Reads the directory written by the current Test 4 runner and saves a separate output; skips empty path samples. | Not run; validate parser and confirm whether `run3/` is a separate historical dataset. |
+| `IJNM/test4/mts-polka/plotter_throughput.audit-v1.py` | Renames the existing bwm-ng throughput plot honestly; does not claim to calculate FCT. | Not run; compare with original throughput CSVs. |
+
+These files are **candidates only**, not validated corrections and not evidence that the published experiments have been reproduced. The original scripts remain unchanged on `main`. No candidate should be merged or used to regenerate a publication result until the validation steps are complete.
+
 ## 4. Current audit conclusion
 
 The root `IJNM/README.md` has been updated to correct the high-level directory description and expose known documentation/script mismatches. Static inspection identified several script/path inconsistencies, but no corrected script has been promoted because the historical input files and execution environment have not yet been reconciled. The Colab notebooks visible in `test1/data/run/` reference external `.bwm` files; they do not replace those source captures. The repository scripts have not been overwritten, and no experiment has been rerun as part of this README/matrix update.
