@@ -10,7 +10,7 @@ A organização dos quatro experimentos segue a **Seção 4 — Experimental Eva
 - [Artigo publicado — DOI: 10.1002/nem.70016](https://doi.org/10.1002/nem.70016)
 - [Repositório de implementação](https://github.com/giancarloliver/MTS-PolKA)
 
-A dissertação de mestrado de 2024 é fonte complementar. Não substitui a nomenclatura, a organização nem os resultados publicados no artigo. Divergências entre artigo, dissertação, scripts, configurações, logs, CSVs e figuras devem permanecer registradas como pendências até serem resolvidas por evidências.
+A dissertação de mestrado de 2024 é fonte complementar. Não substitui a nomenclatura, a organização nem os resultados publicados no artigo. Quando houver divergência entre artigo, dissertação, scripts, configurações, logs, CSVs e figuras, a interpretação deve se apoiar na evidência correspondente e identificar claramente a fonte utilizada.
 
 ## Organização dos experimentos
 
@@ -103,6 +103,6 @@ A avaliação descrita no artigo foi realizada com Mininet e switches BMv2/P4. O
 - Registrar hashes dos arquivos de entrada, versão do script, parâmetros, ambiente, comando, data e saídas de cada reprocessamento.
 - Não declarar reprodução integral apenas porque um script foi iniciado ou executado.
 - Não substituir resultados publicados por valores recalculados sem documentar a origem dos dados e explicar as diferenças.
-- Manter divergências entre artigo, dissertação e artefatos como pendências até haver evidência suficiente.
+- Distinguir informações publicadas no artigo, descrições complementares da dissertação e comportamento observável nos artefatos do repositório.
 
-**Situação documental:** este diretório funciona como inventário e mapa de rastreabilidade. Não certifica que todos os experimentos tenham sido reproduzidos nem que todas as pendências tenham sido sanadas.
+**Situação documental:** este diretório funciona como inventário e mapa de rastreabilidade. Sua documentação não constitui, por si só, certificação de reprodução integral dos experimentos.
