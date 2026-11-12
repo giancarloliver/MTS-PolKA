@@ -63,15 +63,15 @@ O plotter seleciona as interfaces:
 
 O código agrega os dados de até 30 arquivos por interface e marca no gráfico os instantes de 10 e 20 segundos. A interpretação das curvas deve considerar a correspondência entre interface, fluxo, direção da coluna do CSV e unidade de vazão.
 
-## 7. Pendências de auditoria
+## 7. Notas sobre a implementação versionada
 
-1. **Parâmetro -b nos clientes TCP:** o runner monta comandos iperf3 com -b -w 1M. O parâmetro -b não possui valor explícito antes de -w; o valor pretendido não pode ser inferido nem inserido arbitrariamente. Validar o comportamento do comando e confrontá-lo com os logs originais.
-2. **Temporização:** os clientes TCP são iniciados com -t 22; o runner aguarda 10 segundos antes da migração e mais 22 segundos depois. A duração efetiva e os tempos de início/fim precisam ser reconstruídos com logs para comparação com a janela do artigo.
-3. **Coleta e extração:** confirmar que bwm-ng terminou a gravação antes dos comandos grep e que todos os arquivos de interface foram produzidos.
-4. **Amostragem do plotter:** o código descarta uma linha e limita a leitura a 208 linhas. Validar a correspondência temporal e a agregação das 30 amostras.
-5. **Direção dos contadores:** para s1_0-eth1, o plotter usa a coluna 4; para as demais interfaces, usa a coluna 3. A escolha deve ser confrontada com o formato CSV e a direção do tráfego.
+1. **Comandos iperf3 TCP:** o runner monta os comandos dos clientes TCP com `-b -w 1M`; não há valor explícito entre `-b` e `-w`. A documentação registra literalmente essa composição, sem presumir qual seria o parâmetro pretendido.
+2. **Temporização:** os clientes TCP recebem `-t 22`; o runner aguarda 10 segundos antes da migração e mais 22 segundos após a alteração da entrada.
+3. **Coleta:** após encerrar `iperf3` e `bwm-ng`, o runner executa comandos `grep` para gerar arquivos CSV por interface.
+4. **Amostragem do plotter:** o código descarta uma linha inicial e limita a leitura a 208 linhas por arquivo, agregando os arquivos disponíveis para até 30 amostras.
+5. **Colunas do CSV:** para `s1_0-eth1`, o plotter utiliza a quarta coluna; para as demais interfaces selecionadas, utiliza a terceira coluna.
 
-Não corrigir o comando TCP nem os dados originais sem evidência. Produzir uma versão corrigida separada, com justificativa e registro de alterações.
+As notas descrevem o comportamento do código atualmente versionado. Os arquivos e resultados originais permanecem preservados.
 
 ## 8. Preservação
 
