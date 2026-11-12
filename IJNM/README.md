@@ -83,14 +83,14 @@ IJNM/
 
 A implementação P4 e as configurações centrais usadas pelos scripts estão em [m-polka/](../m-polka/), fora de IJNM.
 
-## Achados de auditoria
+## Notas técnicas sobre os artefatos versionados
 
 1. **Test 1:** o script usa os valores decimais 0, 4 e 11 para identificar os perfis representados em binário no artigo como 0, 100 e 1011. O comando bwm-ng contém a grafia “packtes”; a opção/unidade deve ser validada na versão da ferramenta antes de nova execução.
 2. **Test 2:** o runner grava a captura em data/run2/, mas os comandos de extração e o plotter consultam data/run/. O nome correto do plotter é plotter_test-2.py.
 3. **Test 3:** o comando dos clientes TCP contém -b sem valor explícito antes de -w; o valor pretendido não deve ser adivinhado. O runner aguarda 10 segundos e depois 22 segundos, o que deve ser confrontado com a janela temporal descrita no artigo e com os logs.
 4. **Test 4:** o runner grava os logs de ping em latency_test/data/run/, enquanto o plotter de latência lê latency_test/data/run3/. O plotter_fct.py lê CSVs de bwm-ng e plota vazão por interface; não calcula FCT a partir de tempos de início e término. O script de retransmissões é um artefato adicional do repositório, mas retransmissões não são uma das duas métricas explicitamente apresentadas na descrição do Test 4 do artigo.
 
-Esses pontos são pendências de auditoria, não autorização para modificar dados históricos. As correções devem ocorrer em cópias versionadas, preservando os arquivos originais.
+As observações acima descrevem o comportamento dos artefatos atualmente versionados. Elas não alteram os resultados publicados nem autorizam a substituição de dados históricos. Qualquer ajuste futuro deverá preservar os arquivos originais e ser identificado em versão própria.
 
 ## Limitações da avaliação
 
