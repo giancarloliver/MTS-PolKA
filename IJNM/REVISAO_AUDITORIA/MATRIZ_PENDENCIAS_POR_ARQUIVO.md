@@ -4,6 +4,23 @@
 **Audit basis:** file contents retrieved from branch `main`; root README update commit: `e6c2e18418219ee1842a20cf101413c29ca3eb19`.  
 **Status rule:** “Identified” means the discrepancy is visible in the current versioned source. “Pending” means no correction/reprocessing has been accepted as validated. No original experiment result has been modified.
 
+## 1A. Identificação das versões-fonte examinadas
+
+The values below are Git blob SHAs returned by GitHub for the source files inspected on branch `main`. They are identifiers for the retrieved Git objects, not SHA-256 checksums of downloaded file bytes. Record SHA-256 separately when the source artifacts are available locally.
+
+| Source file | Git blob SHA |
+|---|---|
+| `IJNM/README.md` (before correction) | `67c358af7a8efbc9e634fa634174857333fde5b5` |
+| `IJNM/test1/run_test1.py` | `d0f8cf4096b781708d829045dd3245d69c9d0160` |
+| `IJNM/test2/run_test-2.py` | `97ad0dffce9202fb173781ad29bd10be9fdbd03a` |
+| `IJNM/test2/plotter_test-2.py` | `02537a17a3d0873cc08c316684b81d7eb15088b6` |
+| `IJNM/test3/run_test-3.py` | `aae3bebaffb321a529f5235feee9cd3951bea71a` |
+| `IJNM/test3/grafico-test-3.py` | `3d1a9a8a58dc299025871820684fb8e33c61f9ed` |
+| `IJNM/test4/mts-polka/run_test-4.py` | `9975e5e1492dfda9d650bbf37bb75eff939951d6` |
+| `IJNM/test4/mts-polka/plotter_fct.py` | `056646a2b503a30532c755fa188ec25f0e540fc6` |
+| `IJNM/test4/mts-polka/plotter_latency.py` | `98edeb6ab5e7dd87ef302ae293d0d91afba792fc` |
+| `IJNM/test4/mts-polka/plotter_retransmission.py` | `c3d1d5b7ab099aef2c2ccf43277f0efa16ea5c0f` |
+
 ## 1. File-level pending items
 
 | ID | File / artifact | Problem or point to verify | Evidence in current source | Required correction / verification | Situation |
