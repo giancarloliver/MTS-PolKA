@@ -77,17 +77,17 @@ O script procura em retransmission/data/run/ os arquivos ecmp.txt, wcmp.txt, rps
 
 Esse processamento é uma análise complementar do repositório. A origem e a integridade dos quatro arquivos devem ser demonstradas antes de atribuir os valores a uma execução ou método. Retransmissões TCP não são medição direta de reordenação de pacotes.
 
-## 6. Pendências de auditoria
+## 6. Notas sobre a implementação versionada
 
-1. **Nome do runner:** a documentação anterior citava run_test.py; o arquivo presente é run_test-4.py.
-2. **Diretório de logs de latência:** o runner grava os arquivos de ping em latency_test/data/run/, mas plotter_latency.py lê latency_test/data/run3/. A divergência impede presumir que o plotter consuma diretamente os logs produzidos pelo runner atual.
-3. **FCT versus vazão:** plotter_fct.py plota vazão de interfaces a partir de CSVs de bwm-ng; não calcula o tempo de conclusão dos fluxos. É necessário localizar e documentar a fonte dos valores de FCT usados na Figura 18.
-4. **Mice flows e distribuição temporal:** o artigo descreve quatro fluxos por segundo seguindo distribuição de Poisson. No código, o intervalo é obtido por np.random.poisson(1 / lambda_rate) e usado em time.sleep. Isso gera atrasos inteiros segundo uma distribuição de Poisson; não equivale automaticamente a um processo de chegadas Poisson com intervalos exponenciais. Registrar a diferença sem alterar a descrição publicada.
-5. **Duração e amostras:** o runner define samples = 1, duration = 400 e lambda_rate = 4. Conferir a duração real, o número de mice flows iniciados e os horários de término dos elephant flows.
-6. **Arquivos de retransmissão:** confirmar a origem dos quatro arquivos de entrada, a existência de dados para cada método e a correspondência entre os resumos iperf3 e as execuções comparadas.
-7. **Caminhos relativos:** confirmar o diretório de trabalho exigido por cada plotter e a criação prévia dos diretórios data/ e result/.
-8. **Comparabilidade:** manter separados os artefatos MTS-PolKA e os artefatos ECMP/WCMP/RPS. Para cada método, identificar configuração, script, execução, dados brutos e processamento.
-9. **Resultados publicados:** não substituir valores ou gráficos do artigo por saídas de nova execução sem identificar dados de origem, método de cálculo e diferenças encontradas.
+1. **Runner:** o arquivo de execução presente neste diretório é `run_test-4.py`.
+2. **Logs de latência:** o runner grava os arquivos de ping em `latency_test/data/run/`, enquanto `plotter_latency.py` procura os arquivos em `latency_test/data/run3/`.
+3. **FCT e vazão:** `plotter_fct.py` lê CSVs de `bwm-ng` e plota vazão por interface. O código desse plotter não calcula o tempo de conclusão dos fluxos (FCT).
+4. **Geração de mice flows:** o código calcula o intervalo de espera com `np.random.poisson(1 / lambda_rate)` e utiliza o resultado em `time.sleep`. Essa é a implementação efetivamente presente no runner; a descrição metodológica do artigo deve ser consultada separadamente ao interpretar o cenário.
+5. **Parâmetros do runner:** o código define `samples = 1`, `duration = 400` e `lambda_rate = 4`.
+6. **Retransmissões:** `plotter_retransmission.py` espera os arquivos `ecmp.txt`, `wcmp.txt`, `rps.txt` e `mts-polka.txt` em `retransmission/data/run/`.
+7. **Caminhos relativos:** os plotters utilizam caminhos relativos ao diretório de trabalho e pressupõem a estrutura de pastas indicada no código.
+8. **Métodos comparados:** os artefatos MTS-PolKA estão separados dos diretórios de ECMP, WCMP e RPS em `related_works/`.
+9. **Resultados publicados:** os gráficos gerados localmente devem ser identificados como saídas dos scripts do repositório e não confundidos automaticamente com as figuras publicadas no artigo.
 
 ## 7. Preservação e reprodução
 
