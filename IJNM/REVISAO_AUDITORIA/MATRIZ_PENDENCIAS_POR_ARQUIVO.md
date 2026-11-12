@@ -70,6 +70,21 @@ The values below are Git blob SHAs returned by GitHub for the source files inspe
 6. A corrected/reprocessed result is a new result. It must not be represented as the historical published result unless provenance proves they are the same execution.
 7. Close a pending item only when the evidence, correction and verification are recorded. If evidence is unavailable, retain the item as unresolved.
 
+## 5. Published-result baseline — not yet reconciled with raw artifacts
+
+The article's public text establishes the following reference values and definitions. These are **published results**, not values recomputed from the repository's current raw files.
+
+| Experiment / metric | Published baseline | Source location |
+|---|---|---|
+| Test 1 | Total count of UDP packets received by each switch port; profiles 0, 100 and 1011 are described in Figures 11–13. | Article, Table 2 and Section 4.1. |
+| Test 2 | Average throughput on selected core switches; profile 0, 100 and 1011 phases each last 10 seconds. | Article, Table 2 and Section 4.2. |
+| Test 3 | Throughput of the TCP flows at multiple destinations and aggregate throughput at the source; migration is described between 10 s and 20 s. | Article, Table 2 and Section 4.3. |
+| Test 4 — FCT | MTS-PolKA and RPS: approximately 270 s; ECMP: approximately 355 s; WCMP: approximately 340 s. | Article, Section 4.4 and Figure 18. |
+| Test 4 — TCP retransmissions | Elephant flow 1: MTS-PolKA 7,987; RPS 10,240; ECMP 2,099; WCMP 2,693. | Article, Section 4.4 and Figure 19. |
+| Test 4 — mice latency | ECMP paths 4 and 5 have mean latency greater than 7,000 ms; MTS-PolKA and WCMP allocate mice flows to paths with mean latency below 150 ms in the reported scenario. | Article, Section 4.4 and Figure 20. |
+
+The Test 4 code audit found that `plotter_fct.py` plots interface throughput from `bwm-ng` CSVs, rather than deriving FCT from the iperf3 flow logs. Therefore, the article's FCT values cannot be considered reproduced by that plotter. The retransmission plotter expects method-named text files whose provenance still needs to be confirmed. The latency plotter's input path differs from the execution script's output path. These issues remain open until the source logs and their exact run provenance are available.
+
 ## 4. Current audit conclusion
 
 The root `IJNM/README.md` has been updated to correct the high-level directory description and expose known documentation/script mismatches. Static inspection identified several script/path inconsistencies, but no corrected script has been promoted because the historical input files and execution environment have not yet been reconciled. The Colab notebooks visible in `test1/data/run/` reference external `.bwm` files; they do not replace those source captures. The repository scripts have not been overwritten, and no experiment has been rerun as part of this README/matrix update.
