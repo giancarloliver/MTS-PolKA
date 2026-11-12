@@ -48,12 +48,12 @@ As Figuras 11, 12 e 13 do artigo são a referência para a apresentação dos tr
 
 A proporção configurada não garante contagens inteiras exatamente iguais em toda execução finita. A validação deve confrontar os dados brutos com a distribuição prevista e com a configuração efetivamente instalada.
 
-## 6. Pendências de auditoria
+## 6. Notas sobre a implementação versionada
 
-- **Opção de unidade no bwm-ng:** o código contém -u packtes. A grafia e a unidade aceitas devem ser verificadas na versão da ferramenta usada no ambiente original.
-- **Diretórios de saída:** confirmar a existência de data/run/ antes da execução; o script não cria explicitamente esse diretório.
-- **Rastreabilidade:** associar cada arquivo de captura ao perfil, à execução, à configuração P4 e à figura correspondente.
-- **Confronto artigo–código:** verificar as portas/interfaces observadas nos dados em relação ao Apêndice A, Tabela A4. Divergências devem ser documentadas, não resolvidas por suposição.
+- **Monitoramento bwm-ng:** o runner contém o argumento `-u packtes` na chamada da ferramenta. Esta documentação descreve o código versionado, sem afirmar que a opção foi validada em uma instalação específica.
+- **Saída de dados:** o runner grava as capturas em `data/run/`; esse diretório deve existir antes da execução.
+- **Identificação dos dados:** os arquivos de captura devem ser interpretados em conjunto com o perfil executado, a configuração P4 e a figura do artigo correspondente.
+- **Interfaces:** a interpretação das portas observadas deve considerar as configurações do Apêndice A, Tabela A4, e os arquivos de configuração efetivamente utilizados.
 
 ## 7. Preservação
 
